@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #2E1065;
+    --color-accent: #7C3AED;
+    --color-accent-hover: #8B5CF6;
+    --color-highlight: #DDD6FE;
+    --color-neon: #C084FC;
+    --color-bg: #FAF5FF;
+    --color-text: #1E1B4B;
+  }
+  
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+}
+
+@layer components {
+    .btn-primary {
+        @apply px-6 py-2 rounded-lg font-semibold text-white transition-all duration-300;
+        background: linear-gradient(135deg, var(--color-accent), var(--color-neon));
+        box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.39);
+    }
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(124, 58, 237, 0.23);
+        background: linear-gradient(135deg, var(--color-accent-hover), var(--color-neon));
+    }
+    
+    .glass-panel {
+        @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl;
+    }
+    
+    .input-field {
+        @apply w-full px-4 py-3 rounded-lg border border-purple-200 bg-white/50 focus:bg-white focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all outline-none;
+    }
+}

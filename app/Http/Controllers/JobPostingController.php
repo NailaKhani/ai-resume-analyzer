@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobPosting;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 
 class JobPostingController extends Controller
@@ -24,7 +25,7 @@ class JobPostingController extends Controller
             $query->where('experience_level', $request->experience);
         }
 
-        $jobs = $query->latest()->paginate(10)->withQueryString();
+        $jobs = $query->latest()->paginate(3)->withQueryString();
         return view('jobs.index', compact('jobs'));
     }
 
@@ -43,7 +44,9 @@ class JobPostingController extends Controller
         ]);
 
         $validated['user_id'] = auth()->id();
-        JobPosting::create($validated);
+        $job = JobPosting::create($validated);
+
+        ActivityLog::log('Job Created', auth()->user()->name . ' created job "' . $job->title . '"', 'JobPosting', $job->id);
 
         return redirect()->route('jobs.index')->with('success', 'Job posting created successfully.');
     }
@@ -77,6 +80,7 @@ class JobPostingController extends Controller
 
     public function destroy(JobPosting $job)
     {
+        ActivityLog::log('Job Deleted', auth()->user()->name . ' deleted job "' . $job->title . '"', 'JobPosting', $job->id);
         $job->delete();
         return redirect()->route('jobs.index')->with('success', 'Job posting deleted.');
     }

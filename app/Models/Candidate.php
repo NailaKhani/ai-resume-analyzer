@@ -11,13 +11,17 @@ class Candidate extends Model
         'job_posting_id',
         'resume_path',
         'parsed_skills',
+        'missing_skills',
+        'ai_advice',
         'match_score',
+        'status',
     ];
 
     protected function casts(): array
     {
         return [
             'parsed_skills' => 'array',
+            'missing_skills' => 'array',
             'match_score' => 'decimal:2',
         ];
     }

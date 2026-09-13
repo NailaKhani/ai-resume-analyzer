@@ -1,59 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
+  <img src="public/images/hero.jpg" alt="Resume Analyzer AI" width="100%" style="border-radius:12px;margin-bottom:20px;">
+  <h1>✨ Resume Analyzer & Job Matching AI</h1>
+  <p><strong>A Next-Generation AI Recruitment Platform built with Laravel 12 & FastAPI</strong></p>
+</div>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## 🚀 Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The **AI-Powered Resume Analyzer & Job Matching System** is a robust SaaS product designed to solve the real-world problem of manual resume screening. It bridges the gap between overwhelmed HR professionals and eager job candidates by using advanced Natural Language Processing (NLP) to instantly evaluate applications.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This system evaluates candidate resumes against job descriptions using a hybrid scoring model (TF-IDF + Sentence-BERT) and automatically extracts key applicant information.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🌟 Key Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 👑 Multi-Role Architecture
+- **Admin**: System-wide dashboard, global user management, role assignments, and a real-time audit log of all activities.
+- **HR Professional**: Post job openings, review AI-scored candidates, update applicant statuses (Screened, Shortlisted, Interviewed, Rejected), and view interactive Chart.js analytics.
+- **Candidate**: Browse available jobs, upload resumes (PDF/DOCX), manage a rich personal profile, and track their applications and AI match scores.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🧠 Advanced AI Microservice (FastAPI)
+- **Hybrid Scoring**: Combines **TF-IDF (40%)** with **Sentence-BERT (60%)** (`all-MiniLM-L6-v2`) for deep semantic understanding of resumes.
+- **spaCy NER Extraction**: Automatically extracts the candidate's Name, Email, Phone Number, and mentioned Organizations using `en_core_web_sm`.
+- **Skill Gap Analysis**: Compares the candidate's resume against job requirements to generate a list of "Matched" and "Missing" skills, providing actionable AI advice to the candidate.
 
-## Laravel Sponsors
+### 📊 Beautiful, Responsive UI
+- **Glassmorphism Aesthetic**: Deep purple gradients, rich drop shadows, and modern card-based layouts.
+- **Interactive Dashboards**: Role-specific dashboards featuring Chart.js graphs, animated progress bars, and recent activity feeds.
+- **Profile Completeness**: A gamified profile system that encourages candidates to add their LinkedIn, Bio, and Skills to reach 100% completeness.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 🔒 Enterprise Grade Security
+- **Activity Logging**: An immutable audit trail that logs all significant actions (Job Creation, Applications, Status Updates) along with timestamps and IPs.
+- **Strict Role-Based Access Control**: Middleware protected routes ensuring Candidates cannot access HR tools, and HR cannot access Admin tools.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🛠️ Technology Stack
 
-## Contributing
+**Backend (Core System)**
+- Laravel 12 (PHP 8.2+)
+- MySQL
+- Laravel Breeze / Sanctum (Authentication)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Backend (AI Microservice)**
+- Python 3.10+
+- FastAPI & Uvicorn
+- Sentence-Transformers (Sentence-BERT)
+- spaCy
+- Scikit-Learn (TF-IDF)
+- PyPDF2 & python-docx
 
-## Code of Conduct
+**Frontend**
+- HTML5 / Vanilla CSS
+- Chart.js (Analytics)
+- TailwindCSS (Utility classes generated via Vite)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## ⚙️ Installation & Setup
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Setup Laravel Core
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/resume-analyzer.git
+cd resume-analyzer
 
-## License
+# Install PHP dependencies
+composer install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Install NPM dependencies
+npm install
+npm run build
+
+# Setup environment variables
+cp .env.example .env
+php artisan key:generate
+
+# Configure your database in .env, then migrate and seed
+php artisan migrate --seed
+
+# Start the Laravel development server
+php artisan serve
+```
+
+### 2. Setup AI Microservice
+```bash
+# Navigate to the AI service directory
+cd ai_service
+
+# Create and activate a virtual environment
+python -m venv venv
+.\venv\Scripts\activate  # (Windows)
+# source venv/bin/activate # (Mac/Linux)
+
+# Install Python dependencies
+pip install fastapi uvicorn scikit-learn PyPDF2 python-docx spacy sentence-transformers
+
+# Download spaCy English Model
+python -m spacy download en_core_web_sm
+
+# Run the FastAPI server (starts on port 8001)
+uvicorn main:app --reload --port 8001
+```
+
+---
+
+## 👥 Default Accounts
+
+The seeder provides the following accounts for testing:
+
+- **Admin**: `admin@resumeai.com` / `admin123`
+- **HR**: `hr@example.com` / `password`
+- **Candidate**: `candidate@example.com` / `password`
+
+---
+
+## 📜 FYP Proposal Compliance
+
+This project fulfills all requirements of the FA'22 FYP Proposal:
+- ✅ **Real World Problem Solved**: Eliminates manual screening and bias.
+- ✅ **AI Implementation**: Uses ML (TF-IDF + SBERT) for contextual matching, not just simple keyword finding.
+- ✅ **Platform Support**: Fully responsive web application.
+- ✅ **Tools & Languages**: Laravel + Python FastAPI architecture successfully integrated via cURL.
+
+---
+
+<div align="center">
+  <p><i>Developed as a Final Year Project</i> 🎓</p>
+</div>

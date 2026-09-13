@@ -24,6 +24,12 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'phone',
+        'bio',
+        'linkedin_url',
+        'skills',
+        'avatar',
+        'default_resume',
     ];
 
     /**
@@ -57,5 +63,24 @@ class User extends Authenticatable
     public function candidates()
     {
         return $this->hasMany(Candidate::class);
+    }
+
+    public function calculateProfileCompleteness(): int
+    {
+        $score = 0;
+        
+        // Base fields (assumed always there for registered users)
+        if ($this->name) $score += 20;
+        if ($this->email) $score += 20;
+
+        // Optional fields
+        if ($this->phone) $score += 5;
+        if ($this->bio) $score += 15;
+        if ($this->linkedin_url) $score += 5;
+        if ($this->skills) $score += 10;
+        if ($this->avatar) $score += 5;
+        if ($this->default_resume) $score += 20;
+
+        return min(100, $score);
     }
 }

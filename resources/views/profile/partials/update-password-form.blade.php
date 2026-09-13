@@ -1,47 +1,45 @@
 <section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Password') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
-        </p>
-    </header>
-
-    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('password.update') }}">
         @csrf
         @method('put')
 
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
+        <div class="form-group">
+            <label class="form-label" for="update_password_current_password">Current Password</label>
+            <input class="form-input" id="update_password_current_password" name="current_password" type="password"
+                autocomplete="current-password"
+                onfocus="this.style.borderColor='#7C3AED';this.style.boxShadow='0 0 0 3px rgba(124,58,237,0.1)'"
+                onblur="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
             <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
-        <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+        <div class="form-group">
+            <label class="form-label" for="update_password_password">New Password</label>
+            <input class="form-input" id="update_password_password" name="password" type="password"
+                autocomplete="new-password"
+                onfocus="this.style.borderColor='#7C3AED';this.style.boxShadow='0 0 0 3px rgba(124,58,237,0.1)'"
+                onblur="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
             <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+        <div class="form-group">
+            <label class="form-label" for="update_password_password_confirmation">Confirm New Password</label>
+            <input class="form-input" id="update_password_password_confirmation" name="password_confirmation" type="password"
+                autocomplete="new-password"
+                onfocus="this.style.borderColor='#7C3AED';this.style.boxShadow='0 0 0 3px rgba(124,58,237,0.1)'"
+                onblur="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
+        <div style="display:flex;align-items:center;gap:1rem;margin-top:0.5rem;">
+            <button type="submit" class="save-btn"
+                style="background:linear-gradient(135deg,#a855f7,#ec4899);">
+                Update Password
+            </button>
             @if (session('status') === 'password-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                <span style="font-size:0.85rem;color:#059669;font-weight:700;display:flex;align-items:center;gap:0.3rem;">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Updated!
+                </span>
             @endif
         </div>
     </form>
