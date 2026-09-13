@@ -106,27 +106,8 @@ uvicorn main:app --reload --port 8001
 ```
 
 ---
-
-## 👥 Default Accounts
-
-The seeder provides the following accounts for testing:
-
-- **Admin**: `admin@resumeai.com` / `admin123`
-- **HR**: `hr@example.com` / `password`
-- **Candidate**: `candidate@example.com` / `password`
+### Contact Information
+- **Email:** nailakhani5457@gmail.com
+- **LinkedIn:** [Naila Bibi](https://www.linkedin.com/in/naila-bibi-62a2863a7)
 
 ---
-
-## 📜 FYP Proposal Compliance
-
-This project fulfills all requirements of the FA'22 FYP Proposal:
-- ✅ **Real World Problem Solved**: Eliminates manual screening and bias.
-- ✅ **AI Implementation**: Uses ML (TF-IDF + SBERT) for contextual matching, not just simple keyword finding.
-- ✅ **Platform Support**: Fully responsive web application.
-- ✅ **Tools & Languages**: Laravel + Python FastAPI architecture successfully integrated via cURL.
-
----
-
-<div align="center">
-  <p><i>Developed as a Final Year Project</i> 🎓</p>
-</div>
