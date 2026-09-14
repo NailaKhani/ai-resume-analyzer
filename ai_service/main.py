@@ -14,20 +14,20 @@ try:
     from sentence_transformers import SentenceTransformer, util as st_util
     SBERT_MODEL = SentenceTransformer('all-MiniLM-L6-v2')
     SBERT_AVAILABLE = True
-    print("✅ Sentence-BERT loaded: all-MiniLM-L6-v2")
+    print("[OK] Sentence-BERT loaded: all-MiniLM-L6-v2")
 except ImportError:
     SBERT_AVAILABLE = False
-    print("⚠️  sentence-transformers not installed. Using TF-IDF only. Run: pip install sentence-transformers")
+    print("[WARNING] sentence-transformers not installed. Using TF-IDF only. Run: pip install sentence-transformers")
 
 # ─── Try to load spaCy NER model ───
 try:
     import spacy
     NLP = spacy.load("en_core_web_sm")
     SPACY_AVAILABLE = True
-    print("✅ spaCy NER model loaded: en_core_web_sm")
+    print("[OK] spaCy NER model loaded: en_core_web_sm")
 except (ImportError, OSError):
     SPACY_AVAILABLE = False
-    print("⚠️  spaCy not available. Run: pip install spacy && python -m spacy download en_core_web_sm")
+    print("[WARNING] spaCy not available. Run: pip install spacy && python -m spacy download en_core_web_sm")
 
 
 class AnalyzeRequest(BaseModel):
