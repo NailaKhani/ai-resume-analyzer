@@ -81,12 +81,31 @@
                     <a href="{{ route('candidates.my') }}" style="display: inline-block; padding: 0.6rem 1.2rem; background: #059669; color: white; border-radius: 50px; font-weight: 800; font-size: 0.82rem; text-decoration: none;">View My Application</a>
                 </div>
             @else
-                <p style="color: #64748B; font-size: 0.9rem; margin: 0 0 1.5rem 0; line-height: 1.6;">
+                <p style="color: #64748B; font-size: 0.9rem; margin: 0 0 1.25rem 0; line-height: 1.6;">
                     Upload your resume (PDF/DOCX) to get instantly matched against this job listing using AI NLP.
                 </p>
-                <a href="{{ route('candidates.create', ['job_id' => $job->id]) }}" style="display: block; text-align: center; width: 100%; padding: 0.85rem 1.5rem; background: linear-gradient(135deg, #4F46E5, #7C3AED); color: white; border-radius: 50px; font-weight: 800; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);">
-                    Apply For Job Now
-                </a>
+
+                {{-- Inline Apply Form --}}
+                <form method="POST" action="{{ route('candidates.store') }}" enctype="multipart/form-data" id="applyForm-{{ $job->id }}">
+                    @csrf
+                    <input type="hidden" name="job_posting_id" value="{{ $job->id }}">
+
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; font-size: 0.82rem; font-weight: 800; color: #334155; margin-bottom: 0.5rem; letter-spacing: -0.01em;">
+                            Resume File <span style="color:#EF4444;">*</span>
+                        </label>
+                        <label for="resume_file_{{ $job->id }}" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem; border: 2px dashed #CBD5E1; border-radius: 14px; cursor: pointer; transition: all 0.2s; background: #F8FAFC;" onmouseover="this.style.borderColor='#4F46E5';this.style.background='#EEF2FF'" onmouseout="this.style.borderColor='#CBD5E1';this.style.background='#F8FAFC'">
+                            <svg width="20" height="20" fill="none" stroke="#4F46E5" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                            <span id="fileLabel_{{ $job->id }}" style="font-size: 0.85rem; color: #64748B; font-weight: 600;">Click to upload PDF or DOCX</span>
+                        </label>
+                        <input id="resume_file_{{ $job->id }}" type="file" name="resume" accept=".pdf,.docx" required style="display:none;" onchange="document.getElementById('fileLabel_{{ $job->id }}').textContent = this.files[0] ? this.files[0].name : 'Click to upload PDF or DOCX'">
+                        @error('resume') <p style="color:#EF4444;font-size:0.8rem;margin-top:0.3rem;">{{ $message }}</p> @enderror
+                    </div>
+
+                    <button type="submit" style="display:block; width:100%; padding:0.88rem 1.5rem; background:linear-gradient(135deg, #4F46E5, #7C3AED); color:white; border:none; border-radius:50px; font-weight:800; font-size:0.95rem; cursor:pointer; box-shadow:0 6px 18px rgba(79,70,229,0.35); font-family:'Outfit',sans-serif; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 24px rgba(79,70,229,0.45)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 18px rgba(79,70,229,0.35)'">
+                        Apply For Job Now
+                    </button>
+                </form>
             @endif
         </div>
         @else
