@@ -65,12 +65,12 @@
                 <td>
                     <div style="display: flex; align-items: center; gap: 8px;">
                         @if($u->id !== auth()->id())
-                            <form method="POST" action="{{ route('admin.users.role', $u->id) }}">
+                            <form method="POST" action="{{ route('admin.users.toggle-role', $u->id) }}">
                                 @csrf @method('PATCH')
-                                <select name="role" onchange="this.form.submit()" style="padding: 4px 10px; font-size: 0.78rem; font-weight: 800; border-radius: 50px; background: #F8FAFC; border: 1.5px solid #CBD5E1; cursor: pointer;">
-                                    <option value="candidate" {{ $u->role === 'candidate' ? 'selected' : '' }}>Set Candidate</option>
-                                    <option value="hr" {{ $u->role === 'hr' ? 'selected' : '' }}>Set HR</option>
-                                    <option value="admin" {{ $u->role === 'admin' ? 'selected' : '' }}>Set Admin</option>
+                                <select name="role" onchange="this.form.submit()" style="padding: 4px 10px; font-size: 0.78rem; font-weight: 800; border-radius: 50px; background: #F8FAFC; border: 1.5px solid #CBD5E1; cursor: pointer; outline: none;">
+                                    <option value="candidate" {{ $u->role === 'candidate' ? 'selected' : '' }}>Candidate</option>
+                                    <option value="hr" {{ $u->role === 'hr' ? 'selected' : '' }}>HR Manager</option>
+                                    <option value="admin" {{ $u->role === 'admin' ? 'selected' : '' }}>Admin</option>
                                 </select>
                             </form>
                             <form method="POST" action="{{ route('admin.users.destroy', $u->id) }}" onsubmit="return confirm('Delete this user account?')">

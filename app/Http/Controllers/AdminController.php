@@ -79,15 +79,16 @@ class AdminController extends Controller implements HasMiddleware
         return back()->with('success', 'User deleted successfully.');
     }
 
-    public function toggleRole(User $user)
+    public function toggleRole(Request $request, User $user)
     {
         if ($user->id === auth()->id()) {
             return back()->with('error', 'Cannot change your own role.');
         }
-        $newRole = $user->role === 'hr' ? 'candidate' : 'hr';
+        $request->validate(['role' => 'required|in:candidate,hr,admin']);
+        $newRole = $request->role;
         $user->update(['role' => $newRole]);
         ActivityLog::log('Role Changed', auth()->user()->name . ' changed ' . $user->name . '\'s role to ' . $newRole, 'User', $user->id);
-        return back()->with('success', 'User role updated.');
+        return back()->with('success', 'User role updated to ' . ucfirst($newRole) . '.');
     }
 
     public function activityLogs()
