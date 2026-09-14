@@ -5,86 +5,88 @@
 
 <style>
     .dash-card {
-        background: white;
-        border-radius: 16px;
-        border: 1px solid #f0eaff;
-        box-shadow: 0 2px 12px rgba(124,58,237,0.06);
-        transition: box-shadow 0.25s, transform 0.25s;
+        background: #FFFFFF;
+        border-radius: 20px;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .dash-card:hover {
-        box-shadow: 0 8px 28px rgba(124,58,237,0.12);
-        transform: translateY(-2px);
+        box-shadow: 0 16px 32px -10px rgba(79, 70, 229, 0.12);
+        transform: translateY(-4px);
+        border-color: #C7D2FE;
     }
     .stat-number {
         font-size: 2.75rem;
         font-weight: 900;
         line-height: 1;
         letter-spacing: -0.03em;
+        color: #0F172A;
     }
     .progress-bar-track {
         height: 10px;
-        background: #ede9fe;
+        background: #E2E8F0;
         border-radius: 99px;
         overflow: hidden;
     }
     .progress-bar-fill {
         height: 100%;
         border-radius: 99px;
-        background: linear-gradient(90deg, #7C3AED, #C084FC);
+        background: linear-gradient(90deg, #3B82F6, #4F46E5);
         transition: width 1s ease;
     }
     .job-tag {
         display: inline-flex;
         align-items: center;
-        padding: 3px 10px;
+        padding: 4px 12px;
         border-radius: 99px;
-        font-size: 0.72rem;
+        font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 0.03em;
     }
-    .tag-mid    { background: #dbeafe; color: #1d4ed8; }
-    .tag-senior { background: #fef3c7; color: #92400e; }
-    .tag-entry  { background: #d1fae5; color: #065f46; }
+    .tag-mid    { background: #DBEAFE; color: #1D4ED8; }
+    .tag-senior { background: #FEF3C7; color: #92400E; }
+    .tag-entry  { background: #D1FAE5; color: #065F46; }
     .apply-btn {
         display: block;
         text-align: center;
-        padding: 0.65rem 1rem;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #7C3AED, #C084FC);
+        padding: 0.7rem 1.2rem;
+        border-radius: 50px;
+        background: linear-gradient(135deg, #4F46E5, #7C3AED);
         color: white;
-        font-weight: 700;
-        font-size: 0.85rem;
+        font-weight: 800;
+        font-size: 0.88rem;
         text-decoration: none;
-        box-shadow: 0 4px 14px rgba(124,58,237,0.25);
-        transition: opacity 0.2s, transform 0.2s;
+        box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+        transition: all 0.2s;
     }
-    .apply-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .apply-btn:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35); }
     .activity-card {
         display: flex;
         align-items: center;
         gap: 0.875rem;
-        padding: 0.9rem 1rem;
-        background: #faf5ff;
-        border: 1px solid #ede9fe;
-        border-radius: 12px;
-        transition: background 0.2s;
+        padding: 0.9rem 1.1rem;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 14px;
+        transition: all 0.2s;
     }
-    .activity-card:hover { background: #f3e8ff; }
+    .activity-card:hover { background: #EEF2FF; border-color: #C7D2FE; }
 </style>
 
 {{-- ─────────────── WELCOME BANNER ─────────────── --}}
-<div style="border-radius:20px;padding:2.75rem 3rem;margin-bottom:1.75rem;background:linear-gradient(130deg,#2E1065 0%,#5B21B6 45%,#9333EA 75%,#C084FC 100%);position:relative;overflow:hidden;">
+<div style="border-radius: 24px; padding: 2.75rem 3rem; margin-bottom: 1.75rem; background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #312E81 100%); position: relative; overflow: hidden; color: white;">
     {{-- decorative orbs --}}
-    <div style="position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,0.06);pointer-events:none;"></div>
-    <div style="position:absolute;right:120px;bottom:-60px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none;"></div>
-    <div style="position:relative;z-index:2;">
-        <span style="display:inline-block;padding:3px 12px;border-radius:99px;background:rgba(255,255,255,0.15);color:#ddd6fe;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;">
-            {{ ucfirst(auth()->user()->role) }} Dashboard
+    <div style="position: absolute; right: -80px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: rgba(99, 102, 241, 0.15); filter: blur(30px); pointer-events: none;"></div>
+    <div style="position: absolute; right: 120px; bottom: -60px; width: 160px; height: 160px; border-radius: 50%; background: rgba(168, 85, 247, 0.15); filter: blur(30px); pointer-events: none;"></div>
+    <div style="position: relative; z-index: 2;">
+        <span style="display: inline-block; padding: 4px 14px; border-radius: 50px; background: rgba(255, 255, 255, 0.12); color: #C7D2FE; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; border: 1px solid rgba(255,255,255,0.15);">
+            {{ ucfirst(auth()->user()->role) }} Workspace
         </span>
-        <h1 style="color:white;font-size:2.5rem;font-weight:900;margin:0 0 0.5rem;letter-spacing:-0.025em;line-height:1.15;">
+        <h1 style="color: white; font-size: 2.5rem; font-weight: 900; margin: 0 0 0.5rem; letter-spacing: -0.025em; line-height: 1.15;">
             Welcome back, {{ auth()->user()->name }}!
         </h1>
-        <p style="color:#ddd6fe;font-size:1rem;margin:0;max-width:520px;line-height:1.6;">
+        <p style="color: #C7D2FE; font-size: 1.05rem; margin: 0; max-width: 520px; line-height: 1.6;">
             @if(auth()->user()->role !== 'candidate')
                 Manage your job postings and review AI-analyzed candidate applications.
             @else

@@ -4,28 +4,29 @@
 @section('content')
 
 <style>
-    .admin-stat { background:white; border-radius:18px; padding:1.5rem; border:1px solid #f0eaff; box-shadow:0 2px 12px rgba(124,58,237,0.06); }
-    .admin-card { background:white; border-radius:18px; border:1px solid #f0eaff; box-shadow:0 2px 12px rgba(124,58,237,0.06); overflow:hidden; margin-bottom:1.5rem; }
-    .admin-card-header { padding:1.25rem 1.5rem; border-bottom:1px solid #f5f3ff; display:flex; justify-content:space-between; align-items:center; }
-    .admin-card-body { padding:1.5rem; }
-    .badge-role-hr        { background:#dbeafe; color:#1d4ed8; padding:3px 10px; border-radius:99px; font-size:0.72rem; font-weight:700; }
-    .badge-role-candidate { background:#ede9fe; color:#7C3AED; padding:3px 10px; border-radius:99px; font-size:0.72rem; font-weight:700; }
-    .badge-role-admin     { background:#fef3c7; color:#92400e; padding:3px 10px; border-radius:99px; font-size:0.72rem; font-weight:700; }
-    .action-link { font-size:0.8rem; font-weight:700; text-decoration:none; padding:4px 12px; border-radius:8px; border:1.5px solid; transition:background 0.2s; }
+    .admin-stat { background: #FFFFFF; border-radius: 20px; padding: 1.5rem; border: 1px solid #E2E8F0; box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05); transition: all 0.3s ease; }
+    .admin-stat:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -10px rgba(79, 70, 229, 0.12); border-color: #C7D2FE; }
+    .admin-card { background: #FFFFFF; border-radius: 20px; border: 1px solid #E2E8F0; box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05); overflow: hidden; margin-bottom: 1.5rem; }
+    .admin-card-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; }
+    .admin-card-body { padding: 1.5rem; }
+    .badge-role-hr        { background: #DBEAFE; color: #1D4ED8; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; }
+    .badge-role-candidate { background: #EEF2FF; color: #4F46E5; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; }
+    .badge-role-admin     { background: #FEF3C7; color: #92400E; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; }
+    .action-link { font-size: 0.8rem; font-weight: 700; text-decoration: none; padding: 5px 14px; border-radius: 50px; border: 1.5px solid; transition: all 0.2s; }
 </style>
 
 {{-- Page Header --}}
 <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem;">
-    <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(245,158,11,0.3);">
+    <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#3B82F6,#4F46E5);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(59,130,246,0.35);">
         <svg width="26" height="26" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
     </div>
     <div>
-        <h1 style="font-size:1.75rem;font-weight:900;color:#1e1b4b;margin:0;">Admin Panel</h1>
-        <p style="color:#64748b;font-size:0.9rem;margin:0;">System-wide overview and management.</p>
+        <h1 style="font-size:1.75rem;font-weight:900;color:#0F172A;margin:0;">Admin Overview</h1>
+        <p style="color:#64748B;font-size:0.9rem;margin:0;">System-wide monitoring & role controls.</p>
     </div>
     <div style="margin-left:auto;display:flex;gap:0.75rem;">
-        <a href="{{ route('admin.users') }}" style="padding:0.6rem 1.25rem;background:#ede9fe;color:#7C3AED;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">Manage Users</a>
-        <a href="{{ route('admin.activity') }}" style="padding:0.6rem 1.25rem;background:#1e1b4b;color:white;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">Activity Logs</a>
+        <a href="{{ route('admin.users') }}" style="padding:0.65rem 1.4rem;background:#EEF2FF;color:#4F46E5;border-radius:50px;font-weight:800;font-size:0.88rem;text-decoration:none;border:1px solid #C7D2FE;">Manage Users</a>
+        <a href="{{ route('admin.activity') }}" style="padding:0.65rem 1.4rem;background:linear-gradient(135deg,#0F172A,#1E1B4B);color:white;border-radius:50px;font-weight:800;font-size:0.88rem;text-decoration:none;">Activity Logs</a>
     </div>
 </div>
 
