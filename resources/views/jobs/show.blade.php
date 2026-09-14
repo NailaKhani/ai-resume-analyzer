@@ -2,130 +2,108 @@
 @section('title', $job->title)
 
 @section('content')
+
 {{-- Header --}}
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
     <div>
-        <div class="flex items-center gap-2 mb-1">
-            @php $expColors = ['entry'=>'bg-emerald-100 text-emerald-700 border-emerald-200','mid'=>'bg-blue-100 text-blue-700 border-blue-200','senior'=>'bg-amber-100 text-amber-700 border-amber-200']; @endphp
-            <span class="text-xs px-2.5 py-0.5 rounded-full font-semibold border {{ $expColors[$job->experience_level] ?? 'bg-slate-100 text-slate-600' }}">
+        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+            @php 
+                $expColors = [
+                    'entry' => ['bg' => '#D1FAE5', 'text' => '#065F46'],
+                    'senior' => ['bg' => '#FEF3C7', 'text' => '#92400E'],
+                    'mid' => ['bg' => '#DBEAFE', 'text' => '#1D4ED8']
+                ];
+                $color = $expColors[$job->experience_level] ?? ['bg' => '#F1F5F9', 'text' => '#475569'];
+            @endphp
+            <span style="padding: 3px 12px; background: {{ $color['bg'] }}; color: {{ $color['text'] }}; border-radius: 50px; font-size: 0.75rem; font-weight: 800;">
                 {{ ucfirst($job->experience_level) }} Level
             </span>
-            <span class="text-xs text-slate-400">Posted {{ $job->created_at->diffForHumans() }} by {{ $job->user->name }}</span>
+            <span style="color: #64748B; font-size: 0.82rem; font-weight: 600;">Posted {{ $job->created_at->diffForHumans() }} by {{ $job->user->name }}</span>
         </div>
-        <h1 class="text-3xl font-bold text-slate-800">{{ $job->title }}</h1>
+        <h1 style="font-size: 2.2rem; font-weight: 900; color: #0F172A; margin: 0;">{{ $job->title }}</h1>
     </div>
-    <div class="flex items-center gap-2">
+
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
         @if(auth()->user()->role !== 'candidate')
-            <a href="{{ route('jobs.edit', $job->id) }}" class="btn-primary px-5 py-2.5 text-sm">Edit Job</a>
+            <a href="{{ route('jobs.edit', $job->id) }}" style="padding: 0.65rem 1.4rem; background: linear-gradient(135deg, #4F46E5, #7C3AED); color: white; border-radius: 50px; font-weight: 800; font-size: 0.88rem; text-decoration: none;">Edit Job</a>
         @endif
-        <a href="{{ route('jobs.index') }}" class="px-5 py-2.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition text-sm font-medium">Back</a>
+        <a href="{{ route('jobs.index') }}" style="padding: 0.65rem 1.4rem; background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; border-radius: 50px; font-weight: 700; font-size: 0.88rem; text-decoration: none;">Back to Jobs</a>
     </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-    {{-- Left: Job Details (2/3 width) --}}
-    <div class="lg:col-span-2 space-y-6">
-        <div class="glass-panel p-6">
-            <h2 class="text-lg font-bold text-slate-800 mb-4 pb-3 border-b border-purple-100">Job Details</h2>
-            <div class="space-y-4">
-                <div class="flex gap-4">
-                    <span class="text-sm text-slate-500 font-medium w-36 flex-shrink-0">Experience Level</span>
-                    <span class="text-sm px-2.5 py-0.5 rounded-full font-semibold border {{ $expColors[$job->experience_level] ?? '' }}">{{ ucfirst($job->experience_level) }}</span>
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start;">
+    
+    {{-- Left: Job Details & Description --}}
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Job Details Card -->
+        <div class="glass-card" style="padding: 2rem;">
+            <h2 style="font-size: 1.2rem; font-weight: 800; color: #0F172A; margin: 0 0 1.25rem 0; padding-bottom: 0.75rem; border-bottom: 1px solid #E2E8F0;">Required Qualifications</h2>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="display: flex; gap: 1.5rem; align-items: center;">
+                    <span style="width: 140px; font-size: 0.88rem; font-weight: 700; color: #64748B;">Experience Level</span>
+                    <span style="padding: 3px 12px; background: {{ $color['bg'] }}; color: {{ $color['text'] }}; border-radius: 50px; font-size: 0.78rem; font-weight: 800;">
+                        {{ ucfirst($job->experience_level) }}
+                    </span>
                 </div>
-                <div class="flex gap-4">
-                    <span class="text-sm text-slate-500 font-medium w-36 flex-shrink-0">Required Skills</span>
-                    <div class="flex flex-wrap gap-1.5">
+                <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                    <span style="width: 140px; font-size: 0.88rem; font-weight: 700; color: #64748B;">Required Skills</span>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
                         @foreach(explode(',', $job->required_skills) as $skill)
-                            <span class="text-xs px-2 py-0.5 rounded-md bg-violet-100 text-violet-700 font-medium">{{ trim($skill) }}</span>
+                            <span style="padding: 4px 10px; background: #EEF2FF; color: #4F46E5; border-radius: 8px; font-size: 0.82rem; font-weight: 700; border: 1px solid #C7D2FE;">{{ trim($skill) }}</span>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="glass-panel p-6">
-            <h2 class="text-lg font-bold text-slate-800 mb-4 pb-3 border-b border-purple-100">Job Description</h2>
-            <p class="text-slate-600 leading-relaxed whitespace-pre-wrap text-sm">{{ $job->description }}</p>
+        <!-- Description Card -->
+        <div class="glass-card" style="padding: 2rem;">
+            <h2 style="font-size: 1.2rem; font-weight: 800; color: #0F172A; margin: 0 0 1.25rem 0; padding-bottom: 0.75rem; border-bottom: 1px solid #E2E8F0;">Full Job Description</h2>
+            <p style="color: #334155; line-height: 1.75; font-size: 0.95rem; margin: 0; white-space: pre-wrap;">{{ $job->description }}</p>
         </div>
+
     </div>
 
-    {{-- Right: Apply / Candidates (1/3 width) --}}
-    <div class="space-y-6">
+    {{-- Right Column: Apply Widget / Applicants Count --}}
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
         @if(auth()->user()->role === 'candidate')
-        <div class="glass-panel p-6">
-            <h2 class="text-lg font-bold text-slate-800 mb-4 pb-3 border-b border-purple-100">Apply for this Position</h2>
+        <div class="glass-card" style="padding: 2rem;">
+            <h2 style="font-size: 1.15rem; font-weight: 800; color: #0F172A; margin: 0 0 1.25rem 0; padding-bottom: 0.75rem; border-bottom: 1px solid #E2E8F0;">Application Status</h2>
+            
             @if($alreadyApplied)
-                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center">
-                    <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 16px; padding: 1.5rem; text-align: center;">
+                    <div style="width: 44px; height: 44px; background: #D1FAE5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem auto;">
+                        <svg width="24" height="24" fill="none" stroke="#059669" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                     </div>
-                    <p class="text-emerald-800 font-semibold text-sm">Already Applied!</p>
-                    <p class="text-emerald-600 text-xs mt-1">Our AI is analyzing your resume and will update your match score shortly.</p>
+                    <h3 style="font-size: 1.05rem; font-weight: 800; color: #065F46; margin: 0 0 0.25rem 0;">Application Submitted</h3>
+                    <p style="font-size: 0.85rem; color: #047857; margin: 0 0 1rem 0;">Your resume has been analyzed by AI.</p>
+                    <a href="{{ route('candidates.my') }}" style="display: inline-block; padding: 0.6rem 1.2rem; background: #059669; color: white; border-radius: 50px; font-weight: 800; font-size: 0.82rem; text-decoration: none;">View My Application</a>
                 </div>
             @else
-                <p class="text-slate-500 text-sm mb-5">Upload your resume. Our AI will analyze and calculate your match score instantly.</p>
-                <form method="POST" action="{{ route('candidates.store') }}" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="job_posting_id" value="{{ $job->id }}">
-                    <div class="mb-5">
-                        <label for="resume" class="block text-sm font-semibold text-slate-700 mb-2">Resume File</label>
-                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-purple-200 border-dashed rounded-xl bg-violet-50/50 hover:bg-violet-50 transition cursor-pointer">
-                            <div class="space-y-1 text-center">
-                                <svg class="mx-auto h-10 w-10 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                <div class="text-sm text-slate-600">
-                                    <label for="resume" class="relative cursor-pointer text-violet-600 font-semibold hover:text-violet-800">
-                                        <span>Upload a file</span>
-                                        <input id="resume" name="resume" type="file" class="sr-only" accept=".pdf,.docx">
-                                    </label>
-                                    <span class="text-slate-400"> or drag and drop</span>
-                                </div>
-                                <p class="text-xs text-slate-400">PDF, DOCX up to 5MB</p>
-                            </div>
-                        </div>
-                        @error('resume') <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p> @enderror
-                    </div>
-                    <button type="submit" class="btn-primary w-full py-3 text-center">Submit Application</button>
-                </form>
+                <p style="color: #64748B; font-size: 0.9rem; margin: 0 0 1.5rem 0; line-height: 1.6;">
+                    Upload your resume (PDF/DOCX) to get instantly matched against this job listing using AI NLP.
+                </p>
+                <a href="{{ route('candidates.create', ['job_id' => $job->id]) }}" style="display: block; text-align: center; width: 100%; padding: 0.85rem 1.5rem; background: linear-gradient(135deg, #4F46E5, #7C3AED); color: white; border-radius: 50px; font-weight: 800; font-size: 0.95rem; text-decoration: none; box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);">
+                    Apply For Job Now
+                </a>
             @endif
         </div>
-
         @else
-        {{-- HR sees applicants --}}
-        <div class="glass-panel overflow-hidden">
-            <div class="px-6 py-4 border-b border-purple-100">
-                <h2 class="text-lg font-bold text-slate-800">Applicants ({{ $job->candidates->count() }})</h2>
+        <!-- HR / Admin View Applications Widget -->
+        <div class="glass-card" style="padding: 2rem;">
+            <h2 style="font-size: 1.15rem; font-weight: 800; color: #0F172A; margin: 0 0 1rem 0;">Applicants Overview</h2>
+            <div style="padding: 1.25rem; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 14px; text-align: center; margin-bottom: 1.25rem;">
+                <span style="font-size: 2.2rem; font-weight: 900; color: #4F46E5; display: block; line-height: 1;">{{ $job->candidates->count() }}</span>
+                <span style="font-size: 0.82rem; font-weight: 700; color: #64748B; uppercase;">Total Applications Received</span>
             </div>
-            @if($job->candidates->isEmpty())
-                <div class="p-8 text-center">
-                    <p class="text-slate-400 text-sm">No applicants yet. Candidates will appear here once they apply.</p>
-                </div>
-            @else
-                <div class="divide-y divide-purple-50">
-                    @foreach($job->candidates as $c)
-                    <div class="px-6 py-4 flex items-center justify-between hover:bg-violet-50/50 transition">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                                {{ strtoupper(substr($c->user->name, 0, 1)) }}
-                            </div>
-                            <div>
-                                <p class="font-semibold text-slate-800 text-sm">{{ $c->user->name }}</p>
-                                <p class="text-slate-400 text-xs">{{ $c->user->email }}</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            @if($c->match_score !== null)
-                                <span class="text-sm font-bold text-violet-700">{{ number_format($c->match_score, 1) }}%</span>
-                            @else
-                                <span class="text-xs text-slate-400 italic">Analyzing...</span>
-                            @endif
-                            <a href="{{ route('candidates.show', $c->id) }}" class="px-3 py-1.5 rounded-lg bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100 transition text-xs font-semibold">Review</a>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            @endif
+            <a href="{{ route('candidates.index', ['job' => $job->id]) }}" style="display: block; text-align: center; width: 100%; padding: 0.75rem 1.5rem; background: #0F172A; color: white; border-radius: 50px; font-weight: 800; font-size: 0.88rem; text-decoration: none;">
+                Review Applicants Pool
+            </a>
         </div>
         @endif
     </div>
+
 </div>
+
 @endsection

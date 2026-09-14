@@ -2,122 +2,123 @@
 @section('title', $candidate->user->name . ' – Application')
 
 @section('content')
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-    <div class="flex items-center gap-4">
-        <a href="{{ route('candidates.index') }}" class="p-2 rounded-lg hover:bg-violet-100 text-slate-500 hover:text-violet-700 transition">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+
+{{-- Header --}}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="{{ route('candidates.index') }}" style="width: 42px; height: 42px; border-radius: 12px; background: white; border: 1.5px solid #E2E8F0; display: flex; align-items: center; justify-content: center; text-decoration: none; flex-shrink: 0;" onmouseover="this.style.background='#F1F5F9'" onmouseout="this.style.background='white'">
+            <svg width="20" height="20" fill="none" stroke="#4F46E5" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
         </a>
         <div>
-            <h1 class="text-3xl font-bold text-slate-800">{{ $candidate->user->name }}</h1>
-            <p class="text-slate-500 mt-1">Application for: <strong class="text-slate-700">{{ $candidate->jobPosting->title ?? '–' }}</strong></p>
+            <h1 style="font-size: 2rem; font-weight: 900; color: #0F172A; margin: 0 0 0.2rem 0;">{{ $candidate->user->name }}</h1>
+            <p style="color: #64748B; font-size: 0.9rem; margin: 0;">Applied for: <strong style="color: #0F172A;">{{ $candidate->jobPosting->title ?? 'General Listing' }}</strong></p>
         </div>
     </div>
-    <div class="flex items-center gap-2">
-        <a href="{{ route('candidates.index') }}" class="px-5 py-2.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-50 transition text-sm font-medium">Back to List</a>
+    <div>
+        <a href="{{ route('candidates.index') }}" style="padding: 0.65rem 1.4rem; background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; border-radius: 50px; font-weight: 700; font-size: 0.88rem; text-decoration: none;">Back to Applications Pool</a>
     </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-    {{-- Left: Match Score & Info (1/3 width) --}}
-    <div class="space-y-6">
-        <div class="glass-panel p-6 text-center">
-            <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">AI Match Score</h2>
+<div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start;">
+    
+    {{-- Left Column: Score Card & Candidate Info --}}
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- AI Score Card -->
+        <div class="glass-card" style="padding: 2rem; text-align: center;">
+            <span style="font-size: 0.78rem; font-weight: 800; color: #4F46E5; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 1rem;">AI Match Score</span>
             @if($candidate->match_score !== null)
                 @php
                     $score = $candidate->match_score;
-                    $colors = $score >= 75 ? ['text'=>'text-emerald-600', 'bg'=>'bg-emerald-500', 'desc'=>'Strong match for this position', 'light'=>'bg-emerald-100'] : 
-                              ($score >= 50 ? ['text'=>'text-amber-600', 'bg'=>'bg-amber-500', 'desc'=>'Moderate match — review skills gap', 'light'=>'bg-amber-100'] : 
-                              ['text'=>'text-red-600', 'bg'=>'bg-red-500', 'desc'=>'Low match — may not meet requirements', 'light'=>'bg-red-100']);
+                    $scoreColor = $score >= 70 ? '#10B981' : ($score >= 45 ? '#F59E0B' : '#EF4444');
                 @endphp
-                <div class="text-6xl font-extrabold tracking-tight {{ $colors['text'] }} mb-2">{{ number_format($score, 1) }}%</div>
-                <p class="text-sm text-slate-500 mb-6 px-4">{{ $colors['desc'] }}</p>
-                <div class="w-full bg-slate-100 rounded-full h-3 max-w-[220px] mx-auto">
-                    <div class="{{ $colors['bg'] }} h-3 rounded-full transition-all duration-1000" style="width: {{ min($score, 100) }}%"></div>
+                <div style="font-size: 4rem; font-weight: 900; color: {{ $scoreColor }}; line-height: 1; margin-bottom: 0.5rem;">
+                    {{ number_format($score, 1) }}%
+                </div>
+                <div style="width: 100%; height: 10px; background: #E2E8F0; border-radius: 10px; overflow: hidden; margin: 1rem 0;">
+                    <div style="width: {{ min($score, 100) }}%; height: 100%; background: {{ $scoreColor }}; border-radius: 10px;"></div>
                 </div>
             @else
-                <div class="py-8">
-                    <div class="animate-spin w-10 h-10 border-4 border-violet-200 border-t-violet-600 rounded-full mx-auto mb-4"></div>
-                    <p class="text-slate-500 text-sm">Resume is being analyzed...</p>
-                </div>
+                <p style="color: #94A3B8; font-size: 0.9rem;">Analysis Pending</p>
             @endif
         </div>
 
-        <div class="glass-panel p-6">
-            <h2 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Candidate Info</h2>
-            <div class="space-y-4">
+        <!-- Candidate Info Card -->
+        <div class="glass-card" style="padding: 2rem;">
+            <h3 style="font-size: 1.05rem; font-weight: 800; color: #0F172A; margin: 0 0 1.25rem 0; padding-bottom: 0.5rem; border-bottom: 1px solid #E2E8F0;">Candidate Details</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.9rem;">
                 <div>
-                    <p class="text-xs text-slate-400 mb-1">Name</p>
-                    <p class="text-sm font-semibold text-slate-800">{{ $candidate->user->name }}</p>
+                    <span style="font-size: 0.75rem; color: #64748B; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 2px;">Full Name</span>
+                    <strong style="color: #0F172A;">{{ $candidate->user->name }}</strong>
                 </div>
                 <div>
-                    <p class="text-xs text-slate-400 mb-1">Email</p>
-                    <p class="text-sm font-semibold text-slate-800 break-all">{{ $candidate->user->email }}</p>
+                    <span style="font-size: 0.75rem; color: #64748B; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 2px;">Email Address</span>
+                    <strong style="color: #0F172A;">{{ $candidate->user->email }}</strong>
                 </div>
                 <div>
-                    <p class="text-xs text-slate-400 mb-1">Applied For</p>
-                    <p class="text-sm font-semibold text-slate-800">{{ $candidate->jobPosting->title ?? '–' }}</p>
+                    <span style="font-size: 0.75rem; color: #64748B; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 2px;">Applied Date</span>
+                    <span style="color: #475569;">{{ $candidate->created_at->format('M d, Y • h:i A') }}</span>
                 </div>
-                <div>
-                    <p class="text-xs text-slate-400 mb-1">Applied On</p>
-                    <p class="text-sm font-semibold text-slate-800">{{ $candidate->created_at->format('d M Y, h:i A') }}</p>
+            </div>
+        </div>
+
+    </div>
+
+    {{-- Right Column: Skills & Resume View --}}
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        
+        <!-- Matched & Missing Skills Breakdown -->
+        <div class="glass-card" style="padding: 2rem;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: #0F172A; margin: 0 0 1.25rem 0; padding-bottom: 0.75rem; border-bottom: 1px solid #E2E8F0;">NLP Skill Breakdown</h3>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="font-size: 0.85rem; font-weight: 800; color: #059669; text-transform: uppercase; margin: 0 0 0.6rem 0;">Matched Skills Found</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    @forelse((array)$candidate->parsed_skills as $skill)
+                        <span style="padding: 4px 12px; background: #D1FAE5; color: #065F46; border-radius: 8px; font-size: 0.82rem; font-weight: 700; border: 1px solid #A7F3D0;">{{ $skill }}</span>
+                    @empty
+                        <span style="font-size: 0.88rem; color: #94A3B8;">No exact skill matches found in resume.</span>
+                    @endforelse
                 </div>
             </div>
 
+            <div>
+                <h4 style="font-size: 0.85rem; font-weight: 800; color: #DC2626; text-transform: uppercase; margin: 0 0 0.6rem 0;">Missing Skills</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    @forelse((array)$candidate->missing_skills as $skill)
+                        <span style="padding: 4px 12px; background: #FEE2E2; color: #991B1B; border-radius: 8px; font-size: 0.82rem; font-weight: 700; border: 1px solid #FECACA;">{{ $skill }}</span>
+                    @empty
+                        <span style="font-size: 0.88rem; color: #059669; font-weight: 700;">All required skills present!</span>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+
+        <!-- Resume File Card -->
+        <div class="glass-card" style="padding: 2rem;">
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: #0F172A; margin: 0 0 1.25rem 0; padding-bottom: 0.75rem; border-bottom: 1px solid #E2E8F0;">Submitted Resume Document</h3>
             @if($candidate->resume_path)
-                <div class="mt-6 pt-4 border-t border-purple-100">
-                    <a href="{{ Storage::url($candidate->resume_path) }}" target="_blank" class="btn-primary w-full flex justify-center items-center gap-2 py-3">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        Download Resume
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 1.25rem; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 14px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 42px; height: 42px; border-radius: 10px; background: #EEF2FF; color: #4F46E5; display: flex; align-items: center; justify-content: center;">
+                            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <div>
+                            <p style="margin: 0; font-weight: 800; color: #0F172A; font-size: 0.9rem;">Resume Document</p>
+                            <p style="margin: 0; color: #64748B; font-size: 0.78rem;">PDF/DOCX Document File</p>
+                        </div>
+                    </div>
+                    <a href="{{ Storage::url($candidate->resume_path) }}" target="_blank" style="padding: 0.6rem 1.4rem; background: linear-gradient(135deg, #4F46E5, #7C3AED); color: white; border-radius: 50px; font-weight: 800; font-size: 0.85rem; text-decoration: none; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);">
+                        Download Resume 📄
                     </a>
                 </div>
-            @endif
-        </div>
-    </div>
-
-    {{-- Right: Skill Analysis (2/3 width) --}}
-    <div class="lg:col-span-2 space-y-6">
-        <div class="glass-panel p-6">
-            <h2 class="text-lg font-bold text-slate-800 mb-4 pb-3 border-b border-purple-100">Required Skills for This Job</h2>
-            @if($candidate->jobPosting)
-                @php $required = explode(',', $candidate->jobPosting->required_skills); @endphp
-                <div class="flex flex-wrap gap-2 mb-4">
-                    @foreach($required as $skill)
-                        @php 
-                            $s = trim($skill); 
-                            $extracted = array_map('strtolower', (array)($candidate->parsed_skills ?? []));
-                            $matched = in_array(strtolower($s), $extracted);
-                        @endphp
-                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium border {{ $matched ? 'bg-emerald-100 text-emerald-700 border-emerald-200' : 'bg-slate-100 text-slate-500 border-slate-200' }}">
-                            @if($matched)
-                                <svg class="w-3.5 h-3.5 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-                            @else
-                                <svg class="w-3.5 h-3.5 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>
-                            @endif
-                            {{ $s }}
-                        </span>
-                    @endforeach
-                </div>
-                <p class="text-xs text-slate-500 flex items-center gap-4">
-                    <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Matched in resume</span>
-                    <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-slate-300 inline-block"></span> Missing</span>
-                </p>
-            @endif
-        </div>
-
-        <div class="glass-panel p-6">
-            <h2 class="text-lg font-bold text-slate-800 mb-4 pb-3 border-b border-purple-100">All Extracted Skills from Resume</h2>
-            @if($candidate->parsed_skills && count((array)$candidate->parsed_skills) > 0)
-                <div class="flex flex-wrap gap-2">
-                    @foreach((array)$candidate->parsed_skills as $skill)
-                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-violet-100 text-violet-700 border border-violet-200">{{ $skill }}</span>
-                    @endforeach
-                </div>
             @else
-                <div class="p-8 text-center bg-slate-50 rounded-xl border border-slate-100">
-                    <p class="text-slate-500 text-sm">No skills extracted yet. Analysis may still be in progress.</p>
-                </div>
+                <p style="color: #94A3B8; font-size: 0.9rem; margin: 0;">No resume document file uploaded.</p>
             @endif
         </div>
+
     </div>
+
 </div>
+
 @endsection

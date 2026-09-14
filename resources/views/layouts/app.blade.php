@@ -11,7 +11,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-        <!-- Alpine.js CDN to guarantee 100% interactive dropdown & modal clicks -->
+        <!-- Alpine.js CDN for 100% reliable interactive dropdown & modal toggles -->
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
         <!-- Scripts & Vite -->
@@ -20,10 +20,28 @@
         <style>
             * { box-sizing: border-box; }
             [x-cloak] { display: none !important; }
-            body { font-family: 'Outfit', sans-serif; background-color: #F8FAFC; color: #0F172A; }
+            body { font-family: 'Outfit', sans-serif; background-color: #F8FAFC; color: #0F172A; margin: 0; }
             .app-container { max-width: 1280px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
             
-            /* Glass card utility */
+            /* Universal Form Input Styling */
+            input[type="text"], input[type="email"], input[type="password"], input[type="number"], select, textarea {
+                width: 100%;
+                padding: 0.65rem 1rem;
+                border: 1.5px solid #E2E8F0;
+                border-radius: 12px;
+                background-color: #FFFFFF;
+                font-family: 'Outfit', sans-serif;
+                font-size: 0.9rem;
+                color: #0F172A;
+                outline: none;
+                transition: all 0.2s ease;
+            }
+            input:focus, select:focus, textarea:focus {
+                border-color: #4F46E5;
+                box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+            }
+
+            /* Universal Card utility */
             .glass-card {
                 background: #FFFFFF;
                 border: 1px solid #E2E8F0;
@@ -34,6 +52,32 @@
             .glass-card:hover {
                 box-shadow: 0 12px 30px -10px rgba(79, 70, 229, 0.12);
                 border-color: #C7D2FE;
+            }
+
+            /* Universal Table styling */
+            .custom-table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0;
+            }
+            .custom-table th {
+                background: #F1F5F9;
+                color: #475569;
+                font-size: 0.78rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                padding: 12px 18px;
+                border-bottom: 1px solid #E2E8F0;
+            }
+            .custom-table td {
+                padding: 16px 18px;
+                border-bottom: 1px solid #F1F5F9;
+                font-size: 0.9rem;
+                color: #1E293B;
+            }
+            .custom-table tr:hover td {
+                background-color: #F8FAFC;
             }
         </style>
     </head>
@@ -74,34 +118,31 @@
                         </div>
                     </div>
 
-                    <!-- User Actions: Direct Profile Link & Dropdown -->
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        
-                        <!-- Direct Clickable Profile Link -->
-                        <a href="{{ route('profile.edit') }}" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 50px; background: #EEF2FF; border: 1px solid #C7D2FE; color: #4F46E5; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#E0E7FF'" onmouseout="this.style.background='#EEF2FF'">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                            Profile
-                        </a>
+                    <!-- Clean Single Dropdown Trigger -->
+                    <div x-data="{ open: false }" @click.outside="open = false" style="position: relative;">
+                        <button type="button" @click="open = !open" style="display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.1rem; border: 1.5px solid #E2E8F0; border-radius: 50px; background: white; font-size: 0.88rem; font-weight: 700; color: #0F172A; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.2s;" onmouseover="this.style.borderColor='#4F46E5'">
+                            <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
+                            {{ Auth::user()->name }} ({{ ucfirst(Auth::user()->role) }})
+                            <svg style="width:14px;height:14px;fill:#64748B;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
 
-                        <!-- User Info Dropdown -->
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
-                                <button type="button" style="display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.1rem; border: 1.5px solid #E2E8F0; border-radius: 50px; background: white; font-size: 0.88rem; font-weight: 700; color: #0F172A; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.2s;" onmouseover="this.style.borderColor='#4F46E5'">
-                                    <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
-                                    {{ Auth::user()->name }} ({{ ucfirst(Auth::user()->role) }})
-                                    <svg style="width:14px;height:14px;fill:#64748B;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
+                        <!-- Sleek Floating Dropdown Menu -->
+                        <div x-show="open" x-cloak style="position: absolute; right: 0; top: 115%; width: 200px; background: white; border: 1px solid #E2E8F0; border-radius: 16px; box-shadow: 0 12px 30px -5px rgba(15, 23, 42, 0.15); padding: 8px; z-index: 1000;">
+                            <a href="{{ route('profile.edit') }}" style="display: flex; align-items: center; gap: 10px; padding: 10px 14px; color: #1E293B; font-weight: 600; font-size: 0.88rem; text-decoration: none; border-radius: 10px; transition: background 0.2s;" onmouseover="this.style.background='#F1F5F9'" onmouseout="this.style.background='transparent'">
+                                <svg width="16" height="16" fill="none" stroke="#4F46E5" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                Profile Settings
+                            </a>
+                            <div style="height: 1px; background: #F1F5F9; margin: 4px 0;"></div>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" style="width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px 14px; color: #EF4444; font-weight: 600; font-size: 0.88rem; border: none; background: transparent; border-radius: 10px; cursor: pointer; text-align: left; transition: background 0.2s;" onmouseover="this.style.background='#FEE2E2'" onmouseout="this.style.background='transparent'">
+                                    <svg width="16" height="16" fill="none" stroke="#EF4444" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                    Log Out
                                 </button>
-                            </x-slot>
-                            <x-slot name="content">
-                                <x-dropdown-link :href="route('profile.edit')">{{ __('Profile Settings') }}</x-dropdown-link>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Log Out') }}</x-dropdown-link>
-                                </form>
-                            </x-slot>
-                        </x-dropdown>
+                            </form>
+                        </div>
                     </div>
 
                 </div>

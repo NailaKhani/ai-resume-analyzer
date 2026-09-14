@@ -3,74 +3,84 @@
 
 @section('content')
 
-<style>
-    .users-card { background:white; border-radius:18px; border:1px solid #f0eaff; box-shadow:0 2px 12px rgba(124,58,237,0.06); overflow:hidden; }
-    .badge-role-hr        { background:#dbeafe; color:#1d4ed8; padding:3px 10px; border-radius:99px; font-size:0.72rem; font-weight:700; }
-    .badge-role-candidate { background:#ede9fe; color:#7C3AED; padding:3px 10px; border-radius:99px; font-size:0.72rem; font-weight:700; }
-    .badge-role-admin     { background:#fef3c7; color:#92400e; padding:3px 10px; border-radius:99px; font-size:0.72rem; font-weight:700; }
-</style>
-
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.75rem;">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
     <div>
-        <h1 style="font-size:1.75rem;font-weight:900;color:#1e1b4b;margin:0;">User Management</h1>
-        <p style="color:#64748b;font-size:0.9rem;margin:0.2rem 0 0;">Manage all registered users and their roles.</p>
+        <h1 style="font-size: 2rem; font-weight: 900; color: #0F172A; margin: 0 0 0.4rem 0;">User Management</h1>
+        <p style="color: #64748B; font-size: 0.95rem; margin: 0;">Manage registered accounts and role permissions across the system.</p>
     </div>
-    <a href="{{ route('admin.dashboard') }}" style="padding:0.65rem 1.25rem;background:#ede9fe;color:#7C3AED;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">← Back to Admin</a>
+    <a href="{{ route('admin.dashboard') }}" style="padding: 0.65rem 1.4rem; background: #EEF2FF; color: #4F46E5; border: 1px solid #C7D2FE; border-radius: 50px; font-weight: 800; font-size: 0.88rem; text-decoration: none;">
+        ← Back to Admin Overview
+    </a>
 </div>
 
 @if(session('success'))
-    <div style="background:#d1fae5;border:1px solid #a7f3d0;border-radius:12px;padding:0.875rem 1.25rem;margin-bottom:1.5rem;color:#065f46;font-weight:600;font-size:0.9rem;">
+    <div style="background: #D1FAE5; border: 1px solid #A7F3D0; border-radius: 14px; padding: 0.9rem 1.25rem; margin-bottom: 1.5rem; color: #065F46; font-weight: 700; font-size: 0.9rem;">
         ✓ {{ session('success') }}
     </div>
 @endif
 
-<div class="users-card">
-    <table style="width:100%;border-collapse:collapse;">
+<div class="glass-card" style="overflow: hidden;">
+    <table class="custom-table">
         <thead>
-            <tr style="background:#faf5ff;border-bottom:2px solid #f0eaff;">
-                <th style="text-align:left;padding:1rem 1.5rem;font-size:0.78rem;color:#7C3AED;text-transform:uppercase;letter-spacing:0.06em;font-weight:800;">User</th>
-                <th style="text-align:left;padding:1rem;font-size:0.78rem;color:#7C3AED;text-transform:uppercase;letter-spacing:0.06em;font-weight:800;">Role</th>
-                <th style="text-align:left;padding:1rem;font-size:0.78rem;color:#7C3AED;text-transform:uppercase;letter-spacing:0.06em;font-weight:800;">Applications</th>
-                <th style="text-align:left;padding:1rem;font-size:0.78rem;color:#7C3AED;text-transform:uppercase;letter-spacing:0.06em;font-weight:800;">Joined</th>
-                <th style="text-align:left;padding:1rem;font-size:0.78rem;color:#7C3AED;text-transform:uppercase;letter-spacing:0.06em;font-weight:800;">Actions</th>
+            <tr>
+                <th>User Account</th>
+                <th>Role</th>
+                <th>Applications</th>
+                <th>Joined</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach($users as $u)
-            <tr style="border-bottom:1px solid #fafafa;" onmouseover="this.style.background='#faf5ff'" onmouseout="this.style.background='white'">
-                <td style="padding:1rem 1.5rem;">
-                    <div style="display:flex;align-items:center;gap:0.875rem;">
+            <tr>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 12px;">
                         @if($u->avatar)
-                            <img src="{{ Storage::url($u->avatar) }}" style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid #ddd6fe;">
+                            <img src="{{ Storage::url($u->avatar) }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #C7D2FE;">
                         @else
-                            <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#C084FC);display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:1rem;flex-shrink:0;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #3B82F6, #4F46E5); display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 0.95rem; flex-shrink: 0;">
                                 {{ strtoupper(substr($u->name, 0, 1)) }}
                             </div>
                         @endif
                         <div>
-                            <p style="font-weight:800;color:#1e1b4b;margin:0;font-size:0.9rem;">{{ $u->name }}</p>
-                            <p style="color:#94a3b8;margin:0;font-size:0.78rem;">{{ $u->email }}</p>
+                            <p style="font-weight: 800; color: #0F172A; margin: 0; font-size: 0.92rem;">{{ $u->name }}</p>
+                            <p style="color: #64748B; margin: 0; font-size: 0.78rem;">{{ $u->email }}</p>
                         </div>
                     </div>
                 </td>
-                <td style="padding:1rem;"><span class="badge-role-{{ $u->role }}">{{ ucfirst($u->role) }}</span></td>
-                <td style="padding:1rem;font-size:0.875rem;color:#475569;font-weight:600;">{{ $u->candidates_count }}</td>
-                <td style="padding:1rem;font-size:0.82rem;color:#94a3b8;">{{ $u->created_at->format('M d, Y') }}</td>
-                <td style="padding:1rem;">
-                    <div style="display:flex;align-items:center;gap:0.5rem;">
-                        @if($u->id !== auth()->id() && $u->role !== 'admin')
-                        <form method="POST" action="{{ route('admin.users.toggle-role', $u->id) }}">
-                            @csrf @method('PATCH')
-                            <button style="padding:4px 12px;border-radius:8px;font-size:0.78rem;font-weight:700;border:1.5px solid #ddd6fe;background:#ede9fe;color:#7C3AED;cursor:pointer;font-family:'Outfit';">
-                                Make {{ $u->role === 'hr' ? 'Candidate' : 'HR' }}
-                            </button>
-                        </form>
-                        <form method="POST" action="{{ route('admin.users.destroy', $u->id) }}" onsubmit="return confirm('Delete this user permanently?')">
-                            @csrf @method('DELETE')
-                            <button style="padding:4px 12px;border-radius:8px;font-size:0.78rem;font-weight:700;border:1.5px solid #fecdd3;background:#fff1f2;color:#dc2626;cursor:pointer;font-family:'Outfit';">Delete</button>
-                        </form>
+                <td>
+                    @php
+                        $roleStyle = match($u->role) {
+                            'admin' => ['bg' => '#FEF3C7', 'text' => '#92400E'],
+                            'hr'    => ['bg' => '#DBEAFE', 'text' => '#1D4ED8'],
+                            default => ['bg' => '#EEF2FF', 'text' => '#4F46E5']
+                        };
+                    @endphp
+                    <span style="padding: 4px 12px; background: {{ $roleStyle['bg'] }}; color: {{ $roleStyle['text'] }}; border-radius: 50px; font-size: 0.75rem; font-weight: 800;">
+                        {{ ucfirst($u->role) }}
+                    </span>
+                </td>
+                <td style="font-weight: 700; color: #334155;">{{ $u->candidates_count }}</td>
+                <td style="color: #64748B; font-size: 0.82rem; font-weight: 600;">{{ $u->created_at->format('M d, Y') }}</td>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        @if($u->id !== auth()->id())
+                            <form method="POST" action="{{ route('admin.users.role', $u->id) }}">
+                                @csrf @method('PATCH')
+                                <select name="role" onchange="this.form.submit()" style="padding: 4px 10px; font-size: 0.78rem; font-weight: 800; border-radius: 50px; background: #F8FAFC; border: 1.5px solid #CBD5E1; cursor: pointer;">
+                                    <option value="candidate" {{ $u->role === 'candidate' ? 'selected' : '' }}>Set Candidate</option>
+                                    <option value="hr" {{ $u->role === 'hr' ? 'selected' : '' }}>Set HR</option>
+                                    <option value="admin" {{ $u->role === 'admin' ? 'selected' : '' }}>Set Admin</option>
+                                </select>
+                            </form>
+                            <form method="POST" action="{{ route('admin.users.destroy', $u->id) }}" onsubmit="return confirm('Delete this user account?')">
+                                @csrf @method('DELETE')
+                                <button type="submit" style="padding: 5px 12px; background: #FEE2E2; color: #EF4444; border: 1px solid #FECACA; border-radius: 8px; font-size: 0.78rem; font-weight: 800; cursor: pointer;">
+                                    Delete
+                                </button>
+                            </form>
                         @else
-                            <span style="font-size:0.78rem;color:#94a3b8;font-style:italic;">Protected</span>
+                            <span style="font-size: 0.78rem; color: #94A3B8; font-weight: 600;">(Current User)</span>
                         @endif
                     </div>
                 </td>
@@ -78,7 +88,6 @@
             @endforeach
         </tbody>
     </table>
-    <div style="padding:1rem 1.5rem;border-top:1px solid #f0eaff;">{{ $users->links() }}</div>
 </div>
 
 @endsection

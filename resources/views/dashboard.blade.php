@@ -143,13 +143,15 @@
 @if(auth()->user()->role !== 'candidate')
 <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:1.5rem;margin-bottom:1.75rem;">
     <div class="dash-card" style="padding:1.5rem;">
-        <h2 style="font-size:1.05rem;font-weight:800;color:#1e1b4b;margin:0 0 1rem;">Applications per Job</h2>
-        <canvas id="hrAppsChart" height="200"></canvas>
+        <h2 style="font-size:1.05rem;font-weight:800;color:#0F172A;margin:0 0 1rem;">Applications per Job</h2>
+        <div style="height:230px;position:relative;">
+            <canvas id="hrAppsChart"></canvas>
+        </div>
     </div>
-    <div class="dash-card" style="padding:1.5rem;">
-        <h2 style="font-size:1.05rem;font-weight:800;color:#1e1b4b;margin:0 0 1rem;">Candidate Status</h2>
-        <div style="display:flex;align-items:center;justify-content:center;">
-            <canvas id="hrStatusChart" height="200" style="max-width:240px;"></canvas>
+    <div class="dash-card" style="padding:1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+        <h2 style="font-size:1.05rem;font-weight:800;color:#0F172A;margin:0 0 1rem;width:100%;text-align:left;">Candidate Status</h2>
+        <div style="width:210px;height:210px;position:relative;margin:0 auto;">
+            <canvas id="hrStatusChart"></canvas>
         </div>
     </div>
 </div>
@@ -167,17 +169,26 @@
                     datasets: [{
                         label: 'Applicants',
                         data: hrAppsData.map(d => d.value),
-                        backgroundColor: 'rgba(124,58,237,0.7)',
-                        borderRadius: 6
+                        backgroundColor: 'rgba(79, 70, 229, 0.85)',
+                        hoverBackgroundColor: '#4F46E5',
+                        borderRadius: 8
                     }]
                 },
-                options: { responsive: true, plugins: { legend: { display: false } } }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#F1F5F9' }, ticks: { stepSize: 1 } },
+                        x: { grid: { display: false } }
+                    }
+                }
             });
         }
 
-        // HR Dashboard: Status Distribution
+        // HR Dashboard: Status Distribution (Constrained to 1:1 Circle)
         const hrStatusData = @json($statusDistribution ?? []);
-        const hrStatusColors = { 'Pending':'#c4b5fd', 'Screened':'#93c5fd', 'Shortlisted':'#6ee7b7', 'Interviewed':'#fcd34d', 'Rejected':'#fca5a5' };
+        const hrStatusColors = { 'Pending':'#818CF8', 'Screened':'#60A5FA', 'Shortlisted':'#34D399', 'Interviewed':'#FBBF24', 'Rejected':'#F87171' };
         if(document.getElementById('hrStatusChart') && hrStatusData.length > 0) {
             new Chart(document.getElementById('hrStatusChart'), {
                 type: 'doughnut',
@@ -185,11 +196,18 @@
                     labels: hrStatusData.map(d => d.label),
                     datasets: [{
                         data: hrStatusData.map(d => d.value),
-                        backgroundColor: hrStatusData.map(d => hrStatusColors[d.label] || '#e2e8f0'),
-                        borderWidth: 2
+                        backgroundColor: hrStatusData.map(d => hrStatusColors[d.label] || '#E2E8F0'),
+                        borderWidth: 3,
+                        borderColor: '#FFFFFF'
                     }]
                 },
-                options: { responsive: true, cutout: '65%' }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: true,
+                    aspectRatio: 1,
+                    cutout: '70%',
+                    plugins: { legend: { display: false } }
+                }
             });
         }
     });
