@@ -121,7 +121,7 @@
                 <span style="font-size: 1.4rem; font-weight: 900; color: #0F172A; letter-spacing: -0.03em;">Resume<span style="color: #4F46E5;">IQ</span></span>
             </a>
 
-            <!-- Desktop Menu Nav Links (All Anchors Clickable with Smooth Scroll & Full Target Sections!) -->
+            <!-- Desktop Menu Nav Links -->
             <nav style="display: flex; align-items: center; gap: 2rem;">
                 <a href="#features" style="color: #475569; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4F46E5'" onmouseout="this.style.color='#475569'">Features</a>
                 <a href="#roles" style="color: #475569; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4F46E5'" onmouseout="this.style.color='#475569'">Multi-Role</a>
@@ -181,40 +181,40 @@
 
                 </div>
 
-                <!-- Right Visual Column (Floating Animated Tech Orbit Showcase) -->
+                <!-- Right Visual Column (Floating Showcase with Clean SVG Badges) -->
                 <div style="flex: 0 0 48%; max-width: 48%; position: relative;">
                     
                     <!-- Glow Backdrop -->
                     <div class="animate-pulse-glow" style="position: absolute; top: 10%; left: 10%; right: 10%; bottom: 10%; background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, rgba(168, 85, 247, 0.25) 50%, transparent 80%); filter: blur(40px); border-radius: 50%; pointer-events: none;"></div>
 
-                    <!-- Orbiting Tech Stack Badges -->
+                    <!-- Orbiting Tech Stack Badges (Using Clean SVGs!) -->
                     <div class="tech-pill animate-float-slow" style="top: -15px; left: 10%;">
-                        <span style="font-size: 1.2rem;">🐍</span>
-                        <span>Python AI</span>
+                        <svg width="18" height="18" fill="none" stroke="#3B82F6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                        <span>Python Engine</span>
                     </div>
 
                     <div class="tech-pill animate-float-medium" style="top: -20px; right: 8%;">
-                        <span style="font-size: 1.2rem;">⚛️</span>
-                        <span>FastAPI Engine</span>
+                        <svg width="18" height="18" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        <span>FastAPI Service</span>
                     </div>
 
                     <div class="tech-pill animate-float-reverse" style="top: 40%; left: -35px;">
-                        <span style="font-size: 1.2rem;">🗄️</span>
+                        <svg width="18" height="18" fill="none" stroke="#6366F1" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
                         <span>MySQL DB</span>
                     </div>
 
                     <div class="tech-pill animate-float-slow" style="top: 35%; right: -30px;">
-                        <span style="font-size: 1.2rem;">🧠</span>
+                        <svg width="18" height="18" fill="none" stroke="#8B5CF6" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                         <span>SBERT NLP</span>
                     </div>
 
                     <div class="tech-pill animate-float-medium" style="bottom: 10px; left: 5%;">
-                        <span style="font-size: 1.2rem;">📊</span>
+                        <svg width="18" height="18" fill="none" stroke="#F59E0B" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                         <span>Chart.js Analytics</span>
                     </div>
 
                     <div class="tech-pill animate-float-reverse" style="bottom: 5px; right: 10%;">
-                        <span style="font-size: 1.2rem;">📄</span>
+                        <svg width="18" height="18" fill="none" stroke="#EC4899" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                         <span>PDF/DOCX Parser</span>
                     </div>
 
@@ -267,7 +267,7 @@
                         </div>
 
                         <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.75rem; color: #64748B; background: rgba(15, 23, 42, 0.8); padding: 8px 12px; border-radius: 10px;">
-                            <span>⚡ Fast Analysis (< 1.2s response time)</span>
+                            <span>Fast Analysis (< 1.2s response time)</span>
                             <span style="color: #A7F3D0;">● Verified Pipeline</span>
                         </div>
 
@@ -278,7 +278,7 @@
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Features Section (Clean SVG Icons!) -->
     <section id="features" style="padding: 60px 0 80px 0; background: #F8FAFC;">
         <div class="container-xl">
             <div style="text-align: center; max-width: 600px; margin: 0 auto 3rem auto;">
@@ -288,31 +288,48 @@
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+                
+                <!-- Card 1 -->
                 <div class="feature-card">
-                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #EEF2FF; color: #4F46E5; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; margin-bottom: 1rem;">⚡</div>
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #EEF2FF; color: #4F46E5; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem;">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
                     <h3 style="font-size: 1.1rem; font-weight: 800; color: #0F172A; margin: 0 0 0.5rem 0;">Real-World AI Parsing</h3>
                     <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin: 0;">Extract skills, education, and experience directly from PDF & DOCX resumes with high precision.</p>
                 </div>
+
+                <!-- Card 2 -->
                 <div class="feature-card">
-                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #F0FDF4; color: #10B981; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; margin-bottom: 1rem;">🧠</div>
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #F0FDF4; color: #10B981; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem;">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
                     <h3 style="font-size: 1.1rem; font-weight: 800; color: #0F172A; margin: 0 0 0.5rem 0;">Hybrid SBERT Engine</h3>
                     <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin: 0;">Combines Sentence-BERT embeddings with TF-IDF cosine similarity for intelligent semantic scoring.</p>
                 </div>
+
+                <!-- Card 3 -->
                 <div class="feature-card">
-                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #F3E8FF; color: #9333EA; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; margin-bottom: 1rem;">👑</div>
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #F3E8FF; color: #9333EA; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem;">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
                     <h3 style="font-size: 1.1rem; font-weight: 800; color: #0F172A; margin: 0 0 0.5rem 0;">Multi-Role Security</h3>
                     <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin: 0;">Tailored portals for Admin monitoring, HR candidate management, and Candidate job applications.</p>
                 </div>
+
+                <!-- Card 4 -->
                 <div class="feature-card">
-                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 900; margin-bottom: 1rem;">📊</div>
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem;">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
                     <h3 style="font-size: 1.1rem; font-weight: 800; color: #0F172A; margin: 0 0 0.5rem 0;">Chart.js Analytics</h3>
                     <p style="font-size: 0.88rem; color: #64748b; line-height: 1.6; margin: 0;">Visual dashboards with interactive charts tracking candidate conversion and job application trends.</p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Multi-Role Section -->
+    <!-- Multi-Role Section (Clean SVG Icons!) -->
     <section id="roles" style="padding: 80px 0; background: #FFFFFF; border-top: 1px solid #E2E8F0;">
         <div class="container-xl">
             <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem auto;">
@@ -322,8 +339,12 @@
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                
+                <!-- Super Admin -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 24px; padding: 2rem; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: inline-flex; padding: 10px; border-radius: 12px; background: #EEF2FF; color: #4F46E5; font-size: 1.5rem; margin-bottom: 1.25rem;">👑</div>
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #EEF2FF; color: #4F46E5; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
                     <h3 style="font-size: 1.3rem; font-weight: 800; color: #0F172A; margin: 0 0 0.75rem 0;">Super Admin</h3>
                     <ul style="padding-left: 1.2rem; color: #475569; font-size: 0.95rem; line-height: 1.8; margin: 0;">
                         <li>Full system metrics & user management</li>
@@ -331,8 +352,12 @@
                         <li>Real-time activity audit logs</li>
                     </ul>
                 </div>
+
+                <!-- HR Manager -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 24px; padding: 2rem; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: inline-flex; padding: 10px; border-radius: 12px; background: #F0FDF4; color: #10B981; font-size: 1.5rem; margin-bottom: 1.25rem;">💼</div>
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #F0FDF4; color: #10B981; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
                     <h3 style="font-size: 1.3rem; font-weight: 800; color: #0F172A; margin: 0 0 0.75rem 0;">HR Manager</h3>
                     <ul style="padding-left: 1.2rem; color: #475569; font-size: 0.95rem; line-height: 1.8; margin: 0;">
                         <li>Post & manage job openings</li>
@@ -340,8 +365,12 @@
                         <li>Candidate status tracking & charts</li>
                     </ul>
                 </div>
+
+                <!-- Candidate -->
                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 24px; padding: 2rem; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="display: inline-flex; padding: 10px; border-radius: 12px; background: #EFF6FF; color: #2563EB; font-size: 1.5rem; margin-bottom: 1.25rem;">🎓</div>
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    </div>
                     <h3 style="font-size: 1.3rem; font-weight: 800; color: #0F172A; margin: 0 0 0.75rem 0;">Candidate</h3>
                     <ul style="padding-left: 1.2rem; color: #475569; font-size: 0.95rem; line-height: 1.8; margin: 0;">
                         <li>Browse active job opportunities</li>
@@ -349,11 +378,12 @@
                         <li>Track application match feedback</li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION 1: Analytics Section (#analytics Anchor Target) -->
+    <!-- Analytics Section -->
     <section id="analytics" style="padding: 90px 0; background: #F8FAFC; border-top: 1px solid #E2E8F0;">
         <div class="container-xl">
             <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem auto;">
@@ -450,7 +480,7 @@
         </div>
     </section>
 
-    <!-- NEW SECTION 2: AI Engine Architecture (#ai-engine Anchor Target) -->
+    <!-- AI Engine Architecture Section -->
     <section id="ai-engine" style="padding: 90px 0; background: #FFFFFF; border-top: 1px solid #E2E8F0;">
         <div class="container-xl">
             <div style="text-align: center; max-width: 650px; margin: 0 auto 3.5rem auto;">

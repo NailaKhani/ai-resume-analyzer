@@ -11,11 +11,15 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
+        <!-- Alpine.js CDN to guarantee 100% interactive dropdown & modal clicks -->
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+        <!-- Scripts & Vite -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
             * { box-sizing: border-box; }
+            [x-cloak] { display: none !important; }
             body { font-family: 'Outfit', sans-serif; background-color: #F8FAFC; color: #0F172A; }
             .app-container { max-width: 1280px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
             
@@ -36,7 +40,7 @@
     <body class="font-sans antialiased" style="background-color: #F8FAFC; color: #0F172A; min-height: 100vh;">
         <div style="min-height: 100vh;">
             <!-- Navigation Header -->
-            <nav style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); border-bottom: 1px solid #E2E8F0; position: sticky; top: 0; z-index: 50; width: 100%;">
+            <nav style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid #E2E8F0; position: sticky; top: 0; z-index: 50; width: 100%;">
                 <div class="app-container" style="display: flex; justify-content: space-between; align-items: center; height: 70px;">
                     
                     <div style="display: flex; align-items: center; gap: 2.5rem;">
@@ -50,7 +54,7 @@
 
                         <!-- Navigation Items -->
                         <div style="display: flex; gap: 1.5rem; align-items: center;">
-                            <a href="{{ route('dashboard') }}" style="font-size: 0.92rem; font-weight: 700; color: request()->routeIs('dashboard') ? '#4F46E5' : '#475569'; text-decoration: none; padding: 0.4rem 0.8rem; border-radius: 8px; transition: background 0.2s;" onmouseover="this.style.color='#4F46E5'" onmouseout="this.style.color='#475569'">Dashboard</a>
+                            <a href="{{ route('dashboard') }}" style="font-size: 0.92rem; font-weight: 700; color: #475569; text-decoration: none; padding: 0.4rem 0.8rem; border-radius: 8px; transition: color 0.2s;" onmouseover="this.style.color='#4F46E5'" onmouseout="this.style.color='#475569'">Dashboard</a>
                             
                             @if(Auth::user()->role === 'hr')
                                 <a href="{{ route('jobs.index') }}" style="font-size: 0.92rem; font-weight: 600; color: #475569; text-decoration: none; padding: 0.4rem 0.8rem; border-radius: 8px;" onmouseover="this.style.color='#4F46E5'" onmouseout="this.style.color='#475569'">Jobs Management</a>
@@ -70,11 +74,19 @@
                         </div>
                     </div>
 
-                    <!-- Settings Dropdown -->
-                    <div style="display: flex; align-items: center;">
+                    <!-- User Actions: Direct Profile Link & Dropdown -->
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        
+                        <!-- Direct Clickable Profile Link -->
+                        <a href="{{ route('profile.edit') }}" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 50px; background: #EEF2FF; border: 1px solid #C7D2FE; color: #4F46E5; font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='#E0E7FF'" onmouseout="this.style.background='#EEF2FF'">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            Profile
+                        </a>
+
+                        <!-- User Info Dropdown -->
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
-                                <button style="display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.1rem; border: 1.5px solid #E2E8F0; border-radius: 50px; background: white; font-size: 0.88rem; font-weight: 700; color: #0F172A; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.2s;" onmouseover="this.style.borderColor='#4F46E5'">
+                                <button type="button" style="display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.1rem; border: 1.5px solid #E2E8F0; border-radius: 50px; background: white; font-size: 0.88rem; font-weight: 700; color: #0F172A; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: all 0.2s;" onmouseover="this.style.borderColor='#4F46E5'">
                                     <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
                                     {{ Auth::user()->name }} ({{ ucfirst(Auth::user()->role) }})
                                     <svg style="width:14px;height:14px;fill:#64748B;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
